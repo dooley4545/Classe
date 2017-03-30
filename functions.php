@@ -105,7 +105,12 @@ add_action( 'widgets_init', 'classe_widgets_init' );
  * Enqueue scripts and styles.
  */
 function classe_scripts() {
+
+	wp_enqueue_style('bootstrap', get_template_directory_uri() . '/css/bootstrap.min.css');
+
 	wp_enqueue_style( 'classe-style', get_stylesheet_uri() );
+
+	wp_enqueue_script('bootstrap-js', get_template_directory_uri() . '/js/bootstrap.min.js', array('jquery'), '', true);
 
 	wp_enqueue_script( 'classe-navigation', get_template_directory_uri() . '/js/navigation.js', array(), '20151215', true );
 
@@ -116,6 +121,14 @@ function classe_scripts() {
 	}
 }
 add_action( 'wp_enqueue_scripts', 'classe_scripts' );
+
+/**
+ * Footer Menu.
+ */
+function register_my_menu() {
+	register_nav_menu('header-nav',__( 'Header Nav' ));
+}
+add_action( 'init', 'register_my_menu' );
 
 /**
  * Implement the Custom Header feature.
